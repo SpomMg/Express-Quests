@@ -26,9 +26,12 @@ app.listen(port, (err) => {
     console.log(`Server is listening on ${port}`);
   }
 });
+
+const { hashPassword } = require('./auth.js');
+
+app.post('/api/users', hashPassword, movieHandlers.postUser);
+app.put('/api/users/:id', hashPassword, movieHandlers.updateUsers);
 app.post('/api/movies', movieHandlers.postMovie);
-app.post('/api/users', movieHandlers.postUser);
 app.put('/api/movies/:id', movieHandlers.updateMovie);
-app.put('/api/users/:id', movieHandlers.updateUsers);
 app.delete('/api/movies/:id', movieHandlers.deleteMovie);
 app.delete('/api/users/:id', movieHandlers.deleteUser);
